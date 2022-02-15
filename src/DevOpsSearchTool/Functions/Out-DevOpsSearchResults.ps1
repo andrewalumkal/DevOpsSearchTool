@@ -36,7 +36,8 @@ Function Out-DevOpsSearchResults {
         $CurrentResult = @()
         $CurrentResult = Get-DevOpsRawSearchResults -SearchKeyWord $keyword.SearchKeyWord `
             -DevOpsAuthenicationHeader $DevOpsAuthenicationHeader `
-            -DevOpsSearchURI $SearchURI
+            -DevOpsSearchURI $SearchURI `
+            -DevOpsOrganization $DevOpsOrganization
 
         if ($CurrentResult.Count -eq 0) {
 
@@ -45,6 +46,7 @@ Function Out-DevOpsSearchResults {
                 Project       = "NotFound"
                 Repository    = "NotFound"
                 Path          = "NotFound"
+                PathURL       = "NotFound"
             }  
             
         }              

@@ -11,7 +11,11 @@ Function Get-DevOpsRawSearchResults {
 
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        $DevOpsSearchURI
+        $DevOpsSearchURI,
+
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        $DevOpsOrganization
     )
   
     
@@ -35,11 +39,15 @@ Function Get-DevOpsRawSearchResults {
 
             foreach ($item in $result.results) {
 
+                $PathURL = $null
+                $PathURL = "https://" + $DevOpsOrganization + ".visualstudio.com/" + $item.project.name + "/_git/" + $item.repository.name + "?path=" + $item.path
+
                 $SearchResults += [PSCustomObject]@{
                     SearchKeyWord = $SearchKeyWord
                     Project       = $item.project.name
                     Repository    = $item.repository.name
                     Path          = $item.path
+                    PathURL       = $PathURL
                 }
             }
         }
